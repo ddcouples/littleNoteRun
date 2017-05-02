@@ -15,7 +15,8 @@ class Start extends React.Component {
     var newState = !this.state.isBegin;
     this.setState({
       isBegin: true,
-      bgColor:'transparent'
+      bgColor:'transparent',
+      score:0
     });
     // 这里要注意：setState 是一个异步方法，所以需要操作缓存的当前值
     this.props.callbackParent(newState);

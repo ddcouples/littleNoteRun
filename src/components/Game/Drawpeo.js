@@ -10,6 +10,8 @@ function Drawpeo(ctx,w,h){
 	this.bgCount=0;
 	this.speed=0.5;
 	this.peoImgs=[];
+	this.recH=0;
+	this.reH1=this.recH+this.h/5*2;this.reH2=this.recH+this.h/5*4;
      for (var i = 0; i < 5; i++) {
        var img=new Image();
        img.src=require('./imgs/'+(i+1)+'.png');
@@ -33,12 +35,34 @@ Drawpeo.prototype.init=function(s,x,y,delay){
 	 	this.timer%=50;
         this.bgCount=(this.bgCount+1)%3;
 	 }
+	 this.recH+=1;
+    	 this.reH1+=1;
+    	 this.reH2+=1;
 }
 Drawpeo.prototype.draw=function(){
 	 
+
 	 var ctx=this.ctx;
 	 var _r=this._r;
 	 (_r<0)&&(_r=0);
+
+     ctx.save();
+     ctx.fillStyle = "#ccc";
+     
+     if(this.recH>this.h){
+     	this.recH=-this.h/5;
+     } 
+     if(this.reH1>this.h){
+     	this.reH1=-this.h/5;
+     } 
+     if(this.reH2>this.h){
+     	this.reH2=-this.h/5;
+     }              
+     ctx.fillRect(this.w/2-this.w/60,this.recH, this.w/30,this.h/5);
+     ctx.fillRect(this.w/2-this.w/60,this.reH1, this.w/30,this.h/5);
+     ctx.fillRect(this.w/2-this.w/60,this.reH2, this.w/30,this.h/5);
+	ctx.restore();       
+
 	 //绘制白色半圆的代码如下：
      ctx.save();
      ctx.translate(this.x,this.y);
@@ -61,7 +85,7 @@ Drawpeo.prototype.draw=function(){
      }
      ctx.restore();
 
-    
+           
 
     
      
@@ -97,7 +121,7 @@ Drawpeo.prototype.draw=function(){
     ctx.stroke();
 	ctx.restore(); 	
 
- ctx.save();
+    ctx.save();
      ctx.fillStyle = "#000";
      ctx.fillRect(0,this.y+this.peoImgs[this.bgCount].height/2, this.w,6);
      // ctx.fillRect(10, 10, 100, 100);
@@ -116,7 +140,9 @@ Drawpeo.prototype.draw=function(){
      }
     ctx.fillRect(0,this.h-6, this.w,6);
     ctx.stroke();
-	ctx.restore();    
+	ctx.restore();  
+
+           	  
 			
 }
 

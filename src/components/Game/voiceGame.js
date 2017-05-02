@@ -18,7 +18,7 @@ const states={
       places:[],
       voiceContainer:0,
       loc_p:1,
-      speed:0.2,
+      speed:0,
       wayLen:100,//粑粑的个数
       img:[],
       imgStates:[],
@@ -43,10 +43,14 @@ class Game extends React.Component {
   }
   onStart(newState) {
     // Explicitly focus the text input using the raw DOM API
+    this.state.score=0;
+    states.speed=0.2;
     this.setState({
       start: true,
-      voice:states.minWH/6
+      voice:states.minWH/6,
+      score:0
     });
+    console.log(this.state.score)
     if(!analyser) {
       this.oneInit();
         AudioAPI.start().then(a => {
@@ -97,15 +101,17 @@ class Game extends React.Component {
         } 
         if(_voice > states.maxVoice){
           var _v=this.state.voice+states.deltaTime*0.01;
+          states.speed=states.speed+states.deltaTime*0.0001;
           this.setState({
                 voice:_v
            })
           if(states.peoState!=3)states.peoState=1;
           
-           this.imgMove(); 
+           
            this.collision()        
         }else{
          var _v=this.state.voice-states.deltaTime*0.03;
+         states.speed=states.speed-states.deltaTime*0.0002;
           this.setState({
                 voice:_v
            })
@@ -120,23 +126,27 @@ class Game extends React.Component {
             this.state.voice=states.minWH/30;         
           }          
          states.voiceContainer+=states.deltaTime;       
-        if(_voice > states.maxVoice*5&&states.voiceContainer>this.state.sensitivity){
+        if(_voice > states.maxVoice*10&&states.voiceContainer>this.state.sensitivity){
            states.peoState=3;
            states.voiceContainer=0;
            states.loc_p=(states.loc_p+1)%2;
            states.speed=states.speed+0.02;
-           if(states.speed>3){
-            states.speed=3;
-           }
+           
         }
-        
+        if(states.speed>0.5){
+            states.speed=0.5;
+         } 
+         if(states.speed<-0.02){
+            states.speed=-0.02;
+         }                 
          
           states.ctxFront.clearRect(0, 0, states.canWIDTH, states.canHEIGHT);
           // states.ctxFront.drawImage(states.bgImg,0,0,states.bgImg.width,states.bgImg.height);
           // states.Drawpole.init(this.state.voice,states.pole_x,states.pole_y);
           // states.Drawpole.draw(); 
           states.peoImg.init(states.peoState,states.pole_x,states.pole_y,states.deltaTime);
-          states.peoImg.draw();                  
+          states.peoImg.draw();  
+          this.imgMove();                 
     }
    
    game() {
