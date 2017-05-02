@@ -1,0 +1,106 @@
+body,canvas,div,h1,h2,h3,h4,h5{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-size: 62.5%;
+}
+body{
+   background: #fff;
+}
+.container{
+  width: auto;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.container::after{
+  clear: both;
+}
+.container div.info{
+  text-align: center;
+  color: #333;
+  font-size: 1rem;
+  margin-top: .2rem
+}
+div.info h3{
+   color: #999;
+   font-size: 2rem;
+   margin-top: .3rem;
+   
+}
+div.info h3 span{
+  vertical-align: middle;
+}
+div.info h3 span.score{
+  font-size: 3rem;
+  color: #0094ff;
+  margin-left: .2rem;
+}
+.container canvas,div.img_container{
+	position: absolute;
+	top: 7rem;
+	left: 1rem;
+  box-sizing: border-box;
+}
+.container canvas{
+  z-index: 2;
+}
+div.img_container{
+  z-index: -1;
+
+}
+.img_body{
+   
+   position: absolute;
+   width: 120px;
+   height: 90px;
+}
+.img{
+  background: url("./imgs/bianbian.gif") no-repeat;
+  background-size: contain;
+}
+.imgwin{
+  background: url("./imgs/bianwin.gif") no-repeat;
+  background-size: contain;
+}
+.imgyun{
+  background: url("./imgs/bianyun.gif") no-repeat;
+  background-size: contain;
+}
+.start{
+  background: #0094ff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+ font-size: 3rem;
+  text-align: center;  
+  transition: background 2s ease-in-out,opacity 2s ease-in-out;
+  color: #ccc;
+}
+.start h1{
+  margin-top: 20rem;
+  margin-bottom: 3rem;
+  color: #ddd;
+}
+.start button{
+  outline: none;
+   font-size: 2rem;
+   margin-top: 1rem;
+   border:.3rem solid blue;
+   border-bottom: .7rem solid blue;
+   background-color: transparent;
+   text-shadow: .1rem .5rem .2rem #333;
+   box-shadow: 0 .3rem .5rem blue;
+   padding: 1rem;
+   color: #fff;
+   transition: transform 80ms ease-in-out,opacity 2s ease-in-out;
+}
+.start button:hover{
+  border-bottom: .3rem solid blue;
+  transform: translateY(.4rem);
+}
