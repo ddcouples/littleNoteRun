@@ -22,7 +22,9 @@ body{
   text-align: center;
   color: #333;
   font-size: 1rem;
-  margin-top: .2rem
+  margin-top: .2rem;
+  position: relative;
+  z-index: 1;
 }
 div.info h3{
    color: #999;
@@ -44,12 +46,74 @@ div.info h3 span.score{
 	left: 1rem;
   box-sizing: border-box;
 }
+div.modale{
+  position: absolute;
+  color: #3f0;
+  z-index: 10000;
+  text-align: center;
+  background-color: blue;
+}
+div.modale h1{
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+div.close{
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  background: #fff;
+  color: #999;
+  font-size: 3rem;
+  line-height: 3rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+div.content{
+  margin-top: 1rem;
+}
+div.content span.active{
+  
+  background: #fff;
+  color: #333;
+}
+div.content span.active:before{
+  content: '';
+  position: absolute;
+  top: -.4rem;
+  left: -.9rem;
+  border-bottom: 2rem solid #fff;
+  border-left: 1rem dotted transparent;
+  border-right: 1rem dotted transparent;
+  border-top: 1rem dotted transparent;
+}
+div.content span.active:after{
+  content: '';
+  position: absolute;
+  top: -.4rem;
+  right: -.9rem;
+  border-bottom: 2rem solid #fff;
+  border-left: 1rem dotted transparent;
+  border-right: 1rem dotted transparent;
+  border-top: 1rem dotted transparent;
+}
+div.content span{
+  display: inline-block;
+  padding: .8rem 1.2rem;
+  position: relative;
+  margin-bottom: -.5rem;
+}
+div.modale h2{
+  padding-left: 5rem;
+  margin-top: .5rem;
+  font-size: 1rem;
+}
 .container canvas{
-  z-index: 2;
+  z-index: 0;
 }
 div.img_container{
-  z-index: -1;
-
+  z-index: -2;
 }
 .img_body{
    
@@ -103,4 +167,32 @@ div.img_container{
 .start button:hover{
   border-bottom: .3rem solid blue;
   transform: translateY(.4rem);
+}
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing {
+  transform-origin: top center;
+  animation-name: swing;
+  animation-duration: 1.2s;
+  animation-fill-mode: both;  
 }

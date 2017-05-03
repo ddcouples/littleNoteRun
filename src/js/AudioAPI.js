@@ -7,6 +7,9 @@ const AudioContext = window.AudioContext ||
                       window.webkitAudioContext
 
 const isSupport = !!(navigator.getUserMedia && AudioContext)
+if(!isSupport){
+  alert('请使用chrome或者火狐浏览器可体验声控功能!');
+}
 const context = isSupport && new AudioContext()
 export default {
   isSupport,

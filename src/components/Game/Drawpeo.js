@@ -5,7 +5,7 @@ function Drawpeo(ctx,w,h){
 	this.x;
 	this.y;
 	this.floorLen=30;
-	this.offset=50;//偏移
+	this.offset=30;//偏移
 	this.timer=0;
 	this.bgCount=0;
 	this.speed=0.5;
@@ -22,22 +22,25 @@ function rndi2(m, n) {
 	var a = Math.random() * (n - m) + m;
 	return Math.floor(a);
 }
-Drawpeo.prototype.init=function(s,x,y,delay){
+Drawpeo.prototype.init=function(s,x,y,delay,speed){
      var _minH=this.w>this.h?this.h:this.w;
 	 this.s=s;
 	 this.x=x;
 	 this.y=y;
 	 this.x=this.x<0?0:this.x;
 	 this.y=this.y<0?0:this.y;
-
+     this.speed=speed;
+     if(this.speed>10){
+        this.speed=10;
+     }
 	 this.timer+=delay*this.speed;
 	 if(this.timer>50){
 	 	this.timer%=50;
         this.bgCount=(this.bgCount+1)%3;
 	 }
-	 this.recH+=1;
-    	 this.reH1+=1;
-    	 this.reH2+=1;
+	 this.recH+=delay*this.speed*0.1;
+     this.reH1+=delay*this.speed*0.1;
+     this.reH2+=delay*this.speed*0.1;
 }
 Drawpeo.prototype.draw=function(){
 	 

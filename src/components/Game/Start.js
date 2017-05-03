@@ -22,12 +22,17 @@ class Start extends React.Component {
     this.props.callbackParent(newState);
   }
    componentWillReceiveProps(nextProps) {
-        this.setState({isBegin: nextProps.isBegin,text:'被💩砸啦！',score:nextProps.Store});
+        if(nextProps.isBegin.toString()!=this.state.isBegin.toString()){
+          this.setState({isBegin: nextProps.isBegin,text:'被💩砸啦！',score:nextProps.Store});
+          document.title='我躲过了好多萌粑粑,得了'+nextProps.Store+'分,来超过我呀!(小音符快跑)';
+        }
+        
+        
         var that=this;
         if(!nextProps.isBegin){
           var a=setTimeout(function(){
              clearTimeout(a);
-             that.setState({bgColor: '#0094ff',text:'音控小八卦'});
+             that.setState({bgColor: '#0094ff',text:'小音符快跑'});
           },1000)          
         }
         
